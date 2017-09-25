@@ -1,4 +1,4 @@
 logging:
   level:
     root: INFO
-    org.springframework.cloud.context.config: DEBUG
+    org.springframework.cloud.context.config: INFO

@@ -1,31 +1,48 @@
+spring:
+  cloud:
+    config:
+      uri: ${CONFIG_SERVICE_URI:http://localhost:8888}
+      fail-fast: true
+      retry:
+        initial-interval: 2000
+        max-attempts: 30
+  rabbitmq:
+    host: ${RABBITMQ_BIGWIG_TX_URL:amqp://UJoPUdr-:Y8t_6LR3Aliawb54JiMzLlz41mS99xne@curious-nelthilta-664.bigwig.lshift.net:11030/AVNKjQ_gDfVP}
+#    host: ${RABBITMQ_SERVER_HOST:localhost}
+#    port: ${RABBITMQ_PORT:5672}
+#    virtual-host: /
+#    username: test
+#    password: password
+
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/msa_test}
+      database: ${MONGODB_DATABASE:msa_test}
+
+axon:
+  amqp:
+    exchange: product.events.fanout.exchange
+    transaction-mode: none
+    durable-messages: true
+
 eureka:
   client:
     service-url:
-      default-zone: http://localhost:8761/eureka/
+      default-zone: ${DISCOVERY_SERVICE_URL:http://localhost:8761/eureka/}
   instance:
     prefer-ip-address: true
 
-spring:
-  application:
-    exchange: product.events.fanout.exchange
+external:
+  amqp:
+    exchange:
+      fanout:
+        auto-delete: false
+    bind:
+      route-key: "*"
     queue: product.default.queue
-    databaseName: products
-    eventsCollectionName: events
-    snapshotCollectionName: snapshots
-  
-  rabbitmq:
-    hostname: localhost
-    username: test
-    password: password
-  
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/products
 
-logging:
-  level:
-    root: INFO
-    org.springframework: INFO
-    org.axonframework: INFO
-    com.msa.cqrs: INFO
-
+  event-sourcing:
+        events-collection-name: service-events
+        snapshot-collection-name: service-events-snapshots
+  heroku:
+    rabbitmq-env-var: RABBITMQ_BIGWIG_TX_URL
