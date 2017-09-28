@@ -12,12 +12,12 @@ spring:
     databaseName: products
     eventsCollectionName: events
     snapshotCollectionName: snapshots
-  
+
   rabbitmq:
     hostname: localhost
     username: test
     password: password
-  
+
   data:
     mongodb:
       uri: mongodb://localhost:27017/products
@@ -27,5 +27,4 @@ logging:
     root: INFO
     org.springframework: INFO
     org.axonframework: INFO
-    com.msa.cqrs: INFO
-
+    app: INFO

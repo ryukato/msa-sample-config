@@ -10,7 +10,7 @@ spring:
     exchange: product.events.fanout.exchange
     queue: event.stream
     terminal: product.axon.terminal
-  
+
   rabbitmq:
     hostname: localhost
     username: test
@@ -25,5 +25,4 @@ logging:
     root: INFO
     org.springframework: INFO
     org.axonframwork: INFO
-    com.msa.cqrs: DEBUG
-
+    app: DEBUG
