@@ -10,7 +10,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://discovery-service:8761/eureka/
-    fetch-registry: false
+#    fetch-registry: false
   instance:
     non-secure-port: 80
     prefer-ip-address: true
